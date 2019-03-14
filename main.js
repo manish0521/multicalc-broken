@@ -38,7 +38,7 @@ function init() {
         .addEventListener('click', multiplyByAll);
         
     // When the user clicks the divide button, divide the value from each item.
-    document.queryselector('#divide')
+    document.querySelector('#divide')
         .addEventListener('click', divideFromAll);
 }
 
@@ -60,7 +60,7 @@ function appendToList(event) {
     // Append the number to our array.
     // Hint: here (and elsewhere), watch the TYPE of the value above.
     // Research `typeof` operator if you're not sure.
-    numbers = numbers + number;
+    numbers.push(number);
 
     // Update our html.
     updateUL();
@@ -72,9 +72,10 @@ function removeFromList(event) {
     event.preventDefault();
 
     // Get the index we'll remove from the input field.
-    const index = document.querySelector('#listNumber').value;
-
+    const remove = document.querySelector('#list-Number').value;
+    const index = parseFloat(remove);
     // Remove the number at that index from the list.
+
     /*
     ### Hints:
     
@@ -100,6 +101,7 @@ function clearList(event) {
     }
 
     // Update our html.
+    updateUL();
 }
 
 /*
@@ -185,6 +187,7 @@ function divideFromAll(event) {
 */
 
 function updateUL() {
+    clearUL();
     for (let i = 0; i < numbers.length; i++) {
         addToUL(numbers[i]);
     }
@@ -192,7 +195,7 @@ function updateUL() {
 
 function clearUL() {
     const ul = document.querySelector('#number-list');
-    if (ul.hasChildNodes()) {
+    while (ul.hasChildNodes()) {
         ul.removeChild(ul.firstChild);
     }
 }
@@ -200,7 +203,7 @@ function clearUL() {
 // Append to the UL.
 function addToUL(numberToAppend) {
     const ul = document.querySelector('#number-list');
-    const newLI = document.createElement('<li>');
+    const newLI = document.createElement('li');
     newLI.innerText = numberToAppend;
     ul.appendChild(newLI);
 }
